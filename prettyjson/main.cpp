@@ -74,13 +74,11 @@ static void JSONPrintString(const std::string &str)
 
 static void JSONIndent(int depth)
 {
-	for (int i = 0; i < depth; ++i) printf("  ");
+	for (int i = 0; i <= depth; ++i) printf("  ");
 }
 
 static void JSONFormat(JSONNode *node, int depth = 0, bool sameLine = false)
 {
-	if (!sameLine) JSONIndent(depth);
-	
 	if (node->type() == JSONTypeObject) {
 		JSONObject *obj = dynamic_cast<JSONObject *>(node);
 		printf("{ ");
@@ -91,19 +89,19 @@ static void JSONFormat(JSONNode *node, int depth = 0, bool sameLine = false)
 				first = false;
 				if (sameLine) {
 					printf("\n");
-					JSONIndent(depth+1);
+					JSONIndent(depth);
 				}
 			} else {
 				printf(", \n");
-				JSONIndent(depth+1);
+				JSONIndent(depth);
 			}
 			
 			JSONPrintString(iter->first);
 			printf(": ");
-			JSONFormat(iter->second, depth+2, true);
+			JSONFormat(iter->second, depth+1, true);
 		}
 		printf("\n");
-		JSONIndent(depth);
+		JSONIndent(depth-1);
 		printf("}");
 		
 	} else if (node->type() == JSONTypeArray) {
@@ -116,17 +114,17 @@ static void JSONFormat(JSONNode *node, int depth = 0, bool sameLine = false)
 				first = false;
 				if (sameLine) {
 					printf("\n");
-					JSONIndent(depth+1);
+					JSONIndent(depth);
 				}
 			} else {
 				printf(", \n");
-				JSONIndent(depth+1);
+				JSONIndent(depth);
 			}
 			
-			JSONFormat(*iter, depth+2, true);
+			JSONFormat(*iter, depth+1, true);
 		}
 		printf("\n");
-		JSONIndent(depth);
+		JSONIndent(depth-1);
 		printf("]");
 	
 	} else if (node->type() == JSONTypeString) {

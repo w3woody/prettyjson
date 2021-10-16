@@ -6,8 +6,9 @@
       		},
       		{
       			"command": "Second",
-      			"id", 2
+      			"id": 2
       		}
-        ]
-    }
+        ],
+        "alt": { "one": "two", "three": 4}
+    }, { "two" : "three", "four": "five" }
 ]
