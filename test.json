@@ -1,14 +1,13 @@
-{ "array": [ 
-      "one", 
-      2, 
-      3.500000, 
-      null
-    ], 
-  "bletch": "spam", 
-  "broken": true, 
-  "foo": "bar", 
-  "group": { 
-      "a": "b", 
-      "c": "d"
+[ { 
+      "header": "One",
+      "contents": [ {
+      			"command": "First",
+      			"id": 1
+      		},
+      		{
+      			"command": "Second",
+      			"id", 2
+      		}
+        ]
     }
-}
+]

@@ -209,8 +209,6 @@ JSONNode *JSONRecordParser::parse(JSONLexer *lexer)
 	stack.clear();
 	root = NULL;
 	
-	errors.clear();
-	
 	/*
 	 *	Start up the parser
 	 */

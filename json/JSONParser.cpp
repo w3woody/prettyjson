@@ -92,6 +92,8 @@ bool JSONParser::parse(JSONLexer *l, bool w)
 	lexer = l;
 	warnings = w;
 	
+	errors.clear();
+	
 	/*
 	 *	Read the next object. This recursively decides how to handle the
 	 *	rest
@@ -161,6 +163,7 @@ bool JSONParser::parseValue()
 			 */
 			std::string t = lexer->token;
 			warn("token %s unexpected",t.c_str());
+			token = lexer->readToken();
 			continue;
 		}
 	

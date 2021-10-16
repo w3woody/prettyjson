@@ -158,19 +158,20 @@ static void JSONFormat(JSONNode *node, int depth = 0, bool sameLine = false)
 int main(int argc, const char * argv[])
 {
 	FILE *f;
+	bool isStdin = true;
 	
 	if (argc > 1) {
-		f = fopen(argv[1],"r");
+		f = fopen(argv[1],"rb");
 		if (f == NULL) {
 			printf("Unable to open file\n");
 			exit(1);
 		}
+		isStdin = false;
 	} else {
 		f = stdin;
 	}
 	JSONLexer lexer(f);
 	JSONRecordParser parser;
-	
 	JSONNode *node = parser.parse(&lexer);
 	
 	/*
@@ -191,7 +192,7 @@ int main(int argc, const char * argv[])
 		printf("\n");
 	}
 	
-	if (f != stdin) {
+	if (!isStdin) {
 		fclose(f);
 	}
 
