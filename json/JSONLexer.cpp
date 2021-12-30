@@ -107,7 +107,7 @@ int JSONLexer::readToken()
 	
 	token.clear();
 	if (c == '"') {
-		while ((c = readChar()) != '"') {
+		while (((c = readChar()) != '"') && (c != -1)) {
 			if (c == '\\') {
 				/*
 				 *	Escape processing.
