@@ -56,6 +56,11 @@ int JSONLexer::readChar()
 	return ret;
 }
 
+/*	JSONLexer::pushChar
+ *
+ *		Push the read character back for re-reading again
+ */
+
 void JSONLexer::pushChar(int ch)
 {
 	stack[pos++] = (uint8_t)ch;
@@ -145,6 +150,16 @@ int JSONLexer::readToken()
 						token.push_back((char)(0x80 | (0x3F & (hex >> 6))));
 						token.push_back((char)(0x80 | (0x3F & hex)));
 					}
+				} else if (c == 'b') {
+					token.push_back('\b');
+				} else if (c == 'f') {
+					token.push_back('\f');
+				} else if (c == 'n') {
+					token.push_back('\n');
+				} else if (c == 'r') {
+					token.push_back('\r');
+				} else if (c == 't') {
+					token.push_back('\t');
 				} else {
 					token.push_back((char)c);
 				}
